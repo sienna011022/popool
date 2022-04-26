@@ -1,5 +1,4 @@
 rootProject.name = 'popool'
 include 'member'
 include 'common'
-include 'payment'
 
