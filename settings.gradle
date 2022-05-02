@@ -3,4 +3,5 @@ include 'member'
 include 'common'
 include 'payment'
 include 'eureka'
+include 'product'
 
