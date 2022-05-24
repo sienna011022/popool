@@ -1,4 +1,4 @@
-package domain.entity;
+package kr.co.popool.shared;
 
 public class CommonEntity {
 }
