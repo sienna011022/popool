@@ -2,6 +2,7 @@ package kr.co.memberservice.controller;
 
 import io.swagger.annotations.ApiOperation;
 import kr.co.memberservice.domain.dto.MemberMstDto;
+import kr.co.memberservice.error.model.ResponseFormat;
 import kr.co.memberservice.service.MemberMstServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/kr/co/memberMst")//복수화 (RestAPI 설계) 구글링
+@RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberMstController {
 
@@ -17,14 +18,14 @@ public class MemberMstController {
 
     @ApiOperation("회원가입")
     @PostMapping("/signUp")
-    public void signUp(@RequestBody @Valid MemberMstDto.CREATE create){
-        //To do...
+    public ResponseFormat signUp(@RequestBody @Valid MemberMstDto.CREATE create){
         memberMstService.signUp(create);
+        return ResponseFormat.ok();
     }
 
     @ApiOperation("아이디 중복 체크")
     @PostMapping("/signUp/check")
-    public void checkIdentity(@RequestParam("identity") String identity){
-        //To do...
+    public ResponseFormat<Boolean> checkIdentity(@RequestParam("identity") String identity){
+        return ResponseFormat.ok(memberMstService.checkIdentity(identity));
     }
 }

@@ -37,7 +37,7 @@ public class MemberMstDto {
         @ApiModelProperty(example = "MALE or FEMALE")
         @NotBlank(message = "성별을 입력해주세요.")
         private String gender;
-        @ApiModelProperty(example = "ROLE_MEMBER or ROLE_ADMIN")
+        @ApiModelProperty(example = "ROLE_MEMBER")
         @NotBlank(message = "권한을 입력해주세요.")
         private String memberRole;
         @ApiModelProperty(example = "RANK_NORMAL or RANK_CORPORATE")
