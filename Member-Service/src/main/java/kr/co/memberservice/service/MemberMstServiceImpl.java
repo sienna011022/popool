@@ -25,21 +25,23 @@ public class MemberMstServiceImpl implements MemberMstService{
      * @param create
      */
     @Override
-    public void signUp(MemberMstDto.CREATE create) {
+        public void signUp(MemberMstDto.CREATE create) {
 
-        if(checkIdentity(create.getIdentity())){
-            //To do... 예외 처리
-        }
-        if(!create.getPassword().equals(create.getCheckPassword())){
-            //To do... 예외 처리
-        }
+            if(checkIdentity(create.getIdentity())){
+                //To do... 예외 처리
+            }
+            if(!create.getPassword().equals(create.getCheckPassword())){
+                //To do... 예외 처리
+            }
 
-        MemberMstEntity memberMstEntity = MemberMstEntity.builder()
+            MemberMstEntity memberMstEntity = MemberMstEntity.builder()
                 .identity(create.getIdentity())
                 .password(passwordEncoder.encode(create.getPassword()))
                 .name(create.getName())
                 .birth(create.getBirth())
-                .phone(new Phone(create.getPhone()))
+                .phone(new Phone(create.getPhone(
+
+                )))
                 .gender(Gender.of(create.getGender()))
                 .memberRank(MemberRank.of(create.getMemberRank()))
                 .memberRole(MemberRole.of(create.getMemberRole()))

@@ -1,13 +1,13 @@
-package kr.co.productservice;
+package kr.co.careerservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProductServiceApplication {
+public class CareerServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProductServiceApplication.class, args);
+        SpringApplication.run(CareerServiceApplication.class, args);
     }
 
 }

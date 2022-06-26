@@ -1,0 +1,29 @@
+{{>layouts/header}}
+<form class="container" action="/careers/create" method="post">
+    <div class="mb-3">
+        <label class="form-label">careerId</label>
+        <input type="text" class="form-control" name = "careerId">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">name</label>
+        <textarea class="form-control" rows="3" name="name"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">historyId</label>
+        <textarea class="form-control" rows="3" name="historyId"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">grade</label>
+        <textarea class="form-control" rows="3" name="grade"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">period</label>
+        <textarea class="form-control" rows="3" name="period"></textarea>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/articles">Back</a>
+</form>
+{{>layouts/footer}}

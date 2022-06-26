@@ -1,0 +1,36 @@
+{{>layouts/header}}
+<form class="container" action="/scores/create" method="post">
+    <div class="mb-3">
+        <label class="form-label">careerId</label>
+        <textarea class="form-control" rows="1" name="careerId"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">evaluatorId</label>
+        <textarea class="form-control" rows="1" name="evaluatorId"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">attendance</label>
+        <textarea class="form-control" rows="1" name="attendance"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">sincerity</label>
+        <textarea class="form-control" rows="1" name="sincerity"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">positiveness</label>
+        <textarea class="form-control" rows="1" name="positiveness"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">techincal</label>
+        <textarea class="form-control" rows="1" name="techincal"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">cooperative</label>
+        <textarea class="form-control" rows="1" name="cooperative"></textarea>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{{>layouts/footer}}

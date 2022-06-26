@@ -1,4 +1,4 @@
-package kr.co.productservice;
+package kr.co.careerservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
