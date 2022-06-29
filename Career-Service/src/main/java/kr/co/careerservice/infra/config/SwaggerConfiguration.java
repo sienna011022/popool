@@ -1,7 +1,8 @@
-package kr.co.careerservice.configuration;
+package kr.co.careerservice.infra.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -12,12 +13,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
+
     @Bean
-    public Docket api() {
+    public Docket apiCareer() {
+
+        String groupName = "career";
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("board"))
+                .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .groupName(groupName);
+
     }
 }

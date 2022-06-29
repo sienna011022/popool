@@ -1,8 +1,16 @@
 <form action="/posts/uploadMultipleFiles" method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label class="form-label">title</label>
+        <textarea class="form-control" rows="1" name="title"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">content</label>
+        <textarea class="form-control" rows="5" name="content"></textarea>
+    </div>
     <div>
         <input multiple="multiple" type="file" name="files"/>
     </div>
-
     <div>
         <button class="btn indigo waves-effect waves-light"
                 type="submit" name="save">

@@ -6,6 +6,9 @@ import kr.co.memberservice.domain.shared.Phone;
 import kr.co.memberservice.domain.shared.enums.Gender;
 import kr.co.memberservice.domain.shared.enums.MemberRank;
 import kr.co.memberservice.domain.shared.enums.MemberRole;
+import kr.co.memberservice.error.exception.BadRequestException;
+import kr.co.memberservice.error.exception.DuplicatedException;
+import kr.co.memberservice.error.model.ErrorCode;
 import kr.co.memberservice.infra.security.jwt.JwtTokenProvider;
 import kr.co.memberservice.repository.MemberMstRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +24,13 @@ public class MemberMstServiceImpl implements MemberMstService{
     private final PasswordEncoder passwordEncoder;
 
     /**
-     *
-     * @param create
+     * 회원가입
+     * @param create 회원가입하기 위한 회원의 정보
      */
     @Override
         public void signUp(MemberMstDto.CREATE create) {
 
+<<<<<<< HEAD
             if(checkIdentity(create.getIdentity())){
                 //To do... 예외 처리
             }
@@ -35,6 +39,18 @@ public class MemberMstServiceImpl implements MemberMstService{
             }
 
             MemberMstEntity memberMstEntity = MemberMstEntity.builder()
+=======
+        if(checkIdentity(create.getIdentity())){
+            throw new DuplicatedException(ErrorCode.DUPLICATED_ID);
+        }
+        if(!create.getPassword().equals(create.getCheckPassword())){
+            throw new BadRequestException("비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+        }
+
+        //To do... 전화번호 중복 확인 ?
+
+        MemberMstEntity memberMstEntity = MemberMstEntity.builder()
+>>>>>>> cff93e700e3af16edea3bde10ab7ab38e8edab6d
                 .identity(create.getIdentity())
                 .password(passwordEncoder.encode(create.getPassword()))
                 .name(create.getName())
@@ -52,14 +68,7 @@ public class MemberMstServiceImpl implements MemberMstService{
 
     @Override
     public Boolean checkIdentity(String identity) {
-        //To do...
-        return null;
-    }
-
-    @Override
-    public Boolean checkPhone(String phone) {
-        //To do...
-        return null;
+        return memberMstRepository.existsByIdentity(identity);
     }
 
 }

@@ -1,25 +1,23 @@
 package kr.co.careerservice.domain.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
-@AllArgsConstructor
-@ToString
+
 public  class CareerDto {
     @Builder
+    @ToString
     @Getter
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class New{
 
 
         @ApiModelProperty(example = "아이디")
         @NotBlank(message = "아이디를 입력해주세요.")
-        private Long careerId;
+        private String careerId;
 
 
         @ApiModelProperty(example = "평가등급")
@@ -40,6 +38,7 @@ public  class CareerDto {
         @ApiModelProperty(example = "블록체인 아이디")
         @NotBlank(message = "블록체인")
         private String historyId;
+
 
 
     }

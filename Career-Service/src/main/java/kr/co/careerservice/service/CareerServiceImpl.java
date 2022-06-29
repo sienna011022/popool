@@ -10,27 +10,34 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j //로깅을 위함
 @RequiredArgsConstructor
-public class careerServiceImpl implements careerService{
+public class CareerServiceImpl implements CareerService {
 
     private final CareerRepository careerRepository;
 
     /**
-     *
      * @param newCareer
+     * @return
      */
     //엔티티 만들어서 db에 저장해줌
     @Override
-    public void newCareer(CareerDto.New newCareer) {
+    public CareerEntity newCareer(CareerDto.New newCareer) {
        //예외 처리
 
         CareerEntity careerEntity = CareerEntity.builder()
                 .careerId(newCareer.getCareerId())
-                .period(newCareer.getPeriod())
-                .name(newCareer.getName())
-                .historyId(newCareer.getHistoryId())
                 .grade(newCareer.getGrade())
-                .build();
+                .name(newCareer.getName())
+                .period(newCareer.getPeriod())
+                .historyId(newCareer.getHistoryId())
 
-        careerRepository.save(careerEntity);
+                .build();
+        if (careerEntity.getId() != null) {
+            return null;
+        }
+        log.info(careerEntity.getGrade());
+        return careerRepository.save(careerEntity);
     }
+
+
+
 }

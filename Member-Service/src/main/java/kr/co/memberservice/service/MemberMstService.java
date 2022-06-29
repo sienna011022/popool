@@ -9,6 +9,5 @@ public interface MemberMstService {
 
     //common service
     Boolean checkIdentity(String identity);
-    Boolean checkPhone(String phone);
 
 }

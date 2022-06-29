@@ -2,63 +2,55 @@ package kr.co.careerservice.controller;
 
 import kr.co.careerservice.domain.dto.CareerDto;
 import kr.co.careerservice.domain.entity.CareerEntity;
-import kr.co.careerservice.repository.CareerRepository;
-import kr.co.careerservice.service.careerService;
-import kr.co.careerservice.service.careerServiceImpl;
+import kr.co.careerservice.service.CareerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
-@Controller
+@RestController
 @Slf4j //로깅을 위함
 @RequiredArgsConstructor
+@PropertySource("classpath:/application.properties")
 public class CareerController {
 
-    @Autowired
+    private final CareerServiceImpl careerService;
 
-    private final careerServiceImpl careerService;
-
+    //GET
     @GetMapping("/careers/new")
     public String newCareerForm(){
 
-        return "careers/careerNew";
+       return "";
     }
 
 
-    @PostMapping("/careers/create")
-    public String createArticle(CareerDto.New careerDto){
-        log.info("careerDto"+careerDto.toString());
-        careerService.newCareer(careerDto);
-       return "/careers/careerNew";
+    @PostMapping("/careers")
+    public ResponseEntity<CareerEntity> createCareer(@RequestBody @Valid CareerDto.New careerDto){
+        CareerEntity created = careerService.newCareer(careerDto);
+        return(created != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(created) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
 
     @GetMapping("/uploadMultipleFiles")
-    public String uploadFile(){
+    public String mewDocForm(){
 
         return "careers/fileUpload";
     }
 
-    @RequestMapping("/uploadMultipleFiles")
-    public String fileupload(HttpServletRequest request, @RequestBody List<MultipartFile> files){
-        log.info("file"+files);
-        try{
-            for(int i=0;i<files.size();i++){
-                files.get(i).transferTo(new File("C:\\Test_Popook"+files.get(i).getOriginalFilename()));
-            }
-        }catch (IllegalStateException | IOException e){
-            e.printStackTrace();
-        }
-        return "";
-    }
 
+
+
+
+    // 파일 저장할 위치
 
 }
+
+
+
