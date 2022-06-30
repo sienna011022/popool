@@ -43,7 +43,14 @@ public class CareerController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
+    //인사 수정 - PATCH
 
+    @PatchMapping("/careers/{id}")
+    public ResponseEntity<CareerEntity> updateCareer(@PathVariable Long id, @RequestBody CareerDto.New careerDto){
+        CareerEntity updated = careerService.update(id,careerDto);
+        return (updated != null) ? ResponseEntity.status(HttpStatus.OK).body(updated) :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 
 
 

@@ -49,6 +49,36 @@ public class CareerServiceImpl implements CareerService {
         log.info("등록대상:{}",careerEntity.toString());
         return careerRepository.save(careerEntity);
     }
+    @Override
+    public CareerEntity update(Long id, CareerDto.New careerDto) {
+        CareerEntity careerEntity = CareerEntity.builder()
+                .careerId(careerDto.getCareerId())
+                .grade(careerDto.getGrade())
+                .name(careerDto.getName())
+                .period(careerDto.getPeriod())
+                .historyId(careerDto.getHistoryId())
+
+                .build();
+        log.info("id:{},career:{}",id,careerEntity.toString());
+
+        //엔티티 조회 -id
+        CareerEntity target = careerRepository.findById(id).orElse(null);
+
+        //잘못된 요청
+        // id != article.getId()
+        if(target ==null) {
+            //400 잘못된 요청에 대한 응답
+            //왜 다르지...? careerEntity 안에 id가 없네...id로 조회하는게 아닌가/ 일단은 구현
+            log.info("id{},careerEntity{}",id,careerEntity.getId());
+
+            return null;
+
+        }
+        //정상 승인
+        target.patch(careerEntity);
+        CareerEntity updated = careerRepository.save(target);
+        return updated;
+    }
 
 
 }
