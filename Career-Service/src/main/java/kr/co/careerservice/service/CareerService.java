@@ -13,5 +13,5 @@ public interface CareerService {
    CareerEntity newCareer(CareerDto.New newCareer);
 
     CareerEntity update(Long id, CareerDto.New careerDto);
-
+    CareerEntity delete(Long id);
 }

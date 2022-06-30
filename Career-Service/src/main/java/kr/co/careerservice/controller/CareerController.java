@@ -54,6 +54,27 @@ public class CareerController {
 
 
 
+    //인사 삭제 - DELETE
+
+    @DeleteMapping("/careers/{id}")
+    public ResponseEntity<CareerEntity> delete(@PathVariable Long id){
+
+        CareerEntity deleted = careerService.delete(id);
+        return(deleted != null)? ResponseEntity.status(HttpStatus.OK).body(deleted):
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+    }
+
+
+    @GetMapping("/uploadMultipleFiles")
+    public String mewDocForm(){
+
+        return "careers/fileUpload";
+    }
+
+
+
+
 
 }
 

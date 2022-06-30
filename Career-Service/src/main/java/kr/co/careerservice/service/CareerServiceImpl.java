@@ -81,4 +81,16 @@ public class CareerServiceImpl implements CareerService {
     }
 
 
+    @Override
+    public CareerEntity delete(Long id) {
+        CareerEntity target = careerRepository.findById(id).orElse(null);
+        log.info("삭제할 대상 {}",target.toString());
+        if(target == null){
+            return null;
+        }
+
+        //대상 삭제
+        careerRepository.deleteById(id);
+        return target;
+    }
 }
