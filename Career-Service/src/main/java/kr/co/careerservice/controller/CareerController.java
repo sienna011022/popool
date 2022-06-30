@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Slf4j //로깅을 위함
@@ -21,14 +22,19 @@ public class CareerController {
 
     private final CareerServiceImpl careerService;
 
-    //GET
-    @GetMapping("/careers/new")
-    public String newCareerForm(){
 
-       return "";
+    //인사 조회 - GET
+    @GetMapping("/careers")
+    public List<CareerEntity> index(){
+        return careerService.showAll();
+    }
+    //개개인 인사 조회 - GET
+    @GetMapping("/careers/{id}")
+    public CareerEntity index(@PathVariable Long id){
+        return careerService.show(id);
     }
 
-
+    //인사 등록 - POST
     @PostMapping("/careers")
     public ResponseEntity<CareerEntity> createCareer(@RequestBody @Valid CareerDto.New careerDto){
         CareerEntity created = careerService.newCareer(careerDto);
@@ -38,17 +44,9 @@ public class CareerController {
     }
 
 
-    @GetMapping("/uploadMultipleFiles")
-    public String mewDocForm(){
-
-        return "careers/fileUpload";
-    }
 
 
 
-
-
-    // 파일 저장할 위치
 
 }
 

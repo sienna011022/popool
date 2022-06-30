@@ -40,4 +40,19 @@ public class CareerEntity extends BaseEntity {
 
     }
 
+    public void patch(CareerEntity careerEntity){
+        if(careerEntity.careerId != null)
+            this.careerId = careerEntity.careerId;
+        if(careerEntity.grade != null)
+            this.grade = careerEntity.grade;
+        if(careerEntity.name != null)
+            this.name = careerEntity.name;
+        if(careerEntity.period != null)
+            this.period = careerEntity.period;
+        if(careerEntity.historyId != null)
+            this.historyId = careerEntity.historyId;
+
+
+    }
+
 }

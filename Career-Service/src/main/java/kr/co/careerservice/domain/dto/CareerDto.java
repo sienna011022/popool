@@ -19,7 +19,7 @@ public  class CareerDto {
         @NotBlank(message = "아이디를 입력해주세요.")
         private String careerId;
 
-
+        //타입은 나중에 enum으로 수정 예정
         @ApiModelProperty(example = "평가등급")
         @NotBlank(message = "등급을 입력해주세요.")
         private String grade;

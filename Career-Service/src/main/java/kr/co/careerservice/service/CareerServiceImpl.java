@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @Slf4j //로깅을 위함
 @RequiredArgsConstructor
@@ -14,14 +17,23 @@ public class CareerServiceImpl implements CareerService {
 
     private final CareerRepository careerRepository;
 
+
+    @Override
+    public List<CareerEntity> showAll(){
+        return careerRepository.findAll();
+
+    }
+    @Override
+    public CareerEntity show(Long id) {
+        return careerRepository.findById( id).orElse(null);
+    }
+
     /**
      * @param newCareer
-     * @return
+     *
      */
-    //엔티티 만들어서 db에 저장해줌
     @Override
     public CareerEntity newCareer(CareerDto.New newCareer) {
-       //예외 처리
 
         CareerEntity careerEntity = CareerEntity.builder()
                 .careerId(newCareer.getCareerId())
@@ -34,10 +46,9 @@ public class CareerServiceImpl implements CareerService {
         if (careerEntity.getId() != null) {
             return null;
         }
-        log.info(careerEntity.getGrade());
+        log.info("등록대상:{}",careerEntity.toString());
         return careerRepository.save(careerEntity);
     }
-
 
 
 }
