@@ -5,6 +5,7 @@ import kr.co.careerservice.domain.shared.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.lang.invoke.MethodHandles;
 
 
@@ -13,7 +14,7 @@ import java.lang.invoke.MethodHandles;
 @Getter
 @ToString
 @Entity
-public class CareerEntity extends BaseEntity {
+public class CareerEntity extends BaseEntity  {
 
 
     @Column(name = "career_id", unique = true, nullable = false, length = 100)
