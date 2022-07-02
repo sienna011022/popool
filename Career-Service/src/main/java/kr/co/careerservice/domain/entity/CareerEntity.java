@@ -40,7 +40,7 @@ public class CareerEntity extends BaseEntity  {
         this.historyId = historyId;
 
     }
-
+//optional로 고치기
     public void patch(CareerEntity careerEntity){
         if(careerEntity.careerId != null)
             this.careerId = careerEntity.careerId;
