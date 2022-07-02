@@ -16,7 +16,7 @@ import java.lang.invoke.MethodHandles;
 @Entity
 public class CareerEntity extends BaseEntity  {
 
-
+    @JoinColumn(referencedColumnName = "career_id")
     @Column(name = "career_id", unique = true, nullable = false, length = 100)
     private String careerId;
     @Column(name = "grade", nullable = true, length = 100)

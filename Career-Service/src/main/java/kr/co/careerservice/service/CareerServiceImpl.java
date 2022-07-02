@@ -6,6 +6,7 @@ import kr.co.careerservice.repository.CareerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,9 +24,8 @@ public class CareerServiceImpl implements CareerService {
         return careerRepository.findAll();
 
     }
-    @Override
-    public CareerEntity show(Long id) {
-        return careerRepository.findById( id).orElse(null);
+    public CareerEntity show(String CareerId) {
+        return careerRepository.findByCareerId(CareerId);
     }
 
     /**
@@ -33,6 +33,7 @@ public class CareerServiceImpl implements CareerService {
      *
      */
     @Override
+    @Transactional
     public CareerEntity newCareer(CareerDto.New newCareer) {
 
         CareerEntity careerEntity = CareerEntity.builder()
@@ -50,7 +51,8 @@ public class CareerServiceImpl implements CareerService {
         return careerRepository.save(careerEntity);
     }
     @Override
-    public CareerEntity update(Long id, CareerDto.New careerDto) {
+    @Transactional
+    public CareerEntity update(String careerId, CareerDto.New careerDto) {
         CareerEntity careerEntity = CareerEntity.builder()
                 .careerId(careerDto.getCareerId())
                 .grade(careerDto.getGrade())
@@ -59,38 +61,40 @@ public class CareerServiceImpl implements CareerService {
                 .historyId(careerDto.getHistoryId())
 
                 .build();
-        log.info("id:{},career:{}",id,careerEntity.toString());
+        log.info("career id:{},career:{}",careerId,careerEntity.toString());
 
         //엔티티 조회 -id
-        CareerEntity target = careerRepository.findById(id).orElse(null);
+        CareerEntity target = careerRepository.findByCareerId(careerId);
+
 
         //잘못된 요청
         // id != article.getId()
-        if(target ==null) {
+        if(target == null) {
             //400 잘못된 요청에 대한 응답
             //왜 다르지...? careerEntity 안에 id가 없네...id로 조회하는게 아닌가/ 일단은 구현
-            log.info("id{},careerEntity{}",id,careerEntity.getId());
+            log.info("career_id:{},careerEntity{}",careerId,careerEntity.getCareerId());
 
             return null;
 
         }
         //정상 승인
-        target.patch(careerEntity);
+        //target.patch(careerEntity);
         CareerEntity updated = careerRepository.save(target);
         return updated;
     }
 
 
     @Override
-    public CareerEntity delete(Long id) {
-        CareerEntity target = careerRepository.findById(id).orElse(null);
+    @Transactional
+    public CareerEntity delete(String careerId) {
+        CareerEntity target = careerRepository.findByCareerId(careerId);
         log.info("삭제할 대상 {}",target.toString());
         if(target == null){
             return null;
         }
 
         //대상 삭제
-        careerRepository.deleteById(id);
+        careerRepository.deleteByCareerId(careerId);
         return target;
     }
 }

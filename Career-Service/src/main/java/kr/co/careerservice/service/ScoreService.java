@@ -10,4 +10,5 @@ public interface ScoreService {
 
     List<ScoreDto> scores(String careerId);
 
+//    ScoreDto create(String careerId,ScoreDto dto);
 }

@@ -3,6 +3,7 @@ package kr.co.careerservice.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import kr.co.careerservice.domain.entity.CareerEntity;
 import kr.co.careerservice.domain.entity.ScoreEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +27,9 @@ public class ScoreDto {
     @JsonProperty("career_id")
     @ApiModelProperty(example = "평가 대상 아이디")
     @NotBlank(message = "평가 대상 아이디를 입력하세요")
-    private String careerId;
+    private CareerEntity careerId;
+
+
 
 
     @ApiModelProperty(example = "근태")
@@ -52,20 +55,21 @@ public class ScoreDto {
     private int cooperative;
 
 
-
-    public static ScoreDto createScoreDto(ScoreEntity scoreEntity) {
-
+  //  dto로 바꾸기
+    @Builder
+    public static ScoreDto createScoreDto(ScoreEntity scoreEntity){
         return new ScoreDto(
-
-                scoreEntity.getCareerId().getCareerId(),
                 scoreEntity.getEvaluatorId(),
-                scoreEntity.getAttendance(),
-                scoreEntity.getSincerity(),
-                scoreEntity.getCooperative(),
-                scoreEntity.getTechnical(),
-                scoreEntity.getPositiveness()
-        );
+                scoreEntity.getCareerId(),
+                    scoreEntity.getAttendance(),
+                    scoreEntity.getCooperative(),
+                    scoreEntity.getSincerity(),
+                    scoreEntity.getTechnical(),
+                    scoreEntity.getPositiveness());
+
+
     }
+
 
 }
 

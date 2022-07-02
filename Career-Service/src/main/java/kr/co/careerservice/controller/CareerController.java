@@ -8,10 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,9 +29,10 @@ public class CareerController {
         return careerService.showAll();
     }
     //개개인 인사 조회 - GET
-    @GetMapping("/careers/{id}")
-    public CareerEntity index(@PathVariable Long id){
-        return careerService.show(id);
+    @GetMapping("/careers/{careerId}")
+    public CareerEntity index(@PathVariable String careerId){
+
+        return careerService.show(careerId);
     }
 
     //인사 등록 - POST
@@ -45,9 +46,9 @@ public class CareerController {
 
     //인사 수정 - PATCH
 
-    @PatchMapping("/careers/{id}")
-    public ResponseEntity<CareerEntity> updateCareer(@PathVariable Long id, @RequestBody CareerDto.New careerDto){
-        CareerEntity updated = careerService.update(id,careerDto);
+    @PatchMapping("/careers/{careerId}")
+    public ResponseEntity<CareerEntity> updateCareer(@PathVariable String careerId, @RequestBody CareerDto.New careerDto){
+        CareerEntity updated = careerService.update(careerId,careerDto);
         return (updated != null) ? ResponseEntity.status(HttpStatus.OK).body(updated) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
@@ -55,11 +56,11 @@ public class CareerController {
 
 
     //인사 삭제 - DELETE
+    //부모 자식 문제땜에 작동을 안함...
+    @DeleteMapping("/careers/{careerId}")
+    public ResponseEntity<CareerEntity> delete(@PathVariable String careerId){
 
-    @DeleteMapping("/careers/{id}")
-    public ResponseEntity<CareerEntity> delete(@PathVariable Long id){
-
-        CareerEntity deleted = careerService.delete(id);
+        CareerEntity deleted = careerService.delete(careerId);
         return(deleted != null)? ResponseEntity.status(HttpStatus.OK).body(deleted):
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 

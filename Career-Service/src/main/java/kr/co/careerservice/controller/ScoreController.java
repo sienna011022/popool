@@ -1,6 +1,7 @@
 package kr.co.careerservice.controller;
 
 import kr.co.careerservice.domain.dto.ScoreDto;
+import kr.co.careerservice.domain.entity.ScoreEntity;
 import kr.co.careerservice.service.CareerServiceImpl;
 import kr.co.careerservice.service.ScoreServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,10 @@ public class ScoreController {
         List<ScoreDto> dtos = scoreService.scores(careerId);
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
     }
+//    @PostMapping("/careers/score/{careerId}")
+//    public ResponseEntity<ScoreDto> create(@PathVariable String careerId,ScoreDto dto){
+//        ScoreDto createdDto = scoreService.create(careerId,dto);
+
 
 
 

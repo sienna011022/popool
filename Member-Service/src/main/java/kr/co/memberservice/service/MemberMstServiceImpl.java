@@ -30,7 +30,6 @@ public class MemberMstServiceImpl implements MemberMstService{
     @Override
         public void signUp(MemberMstDto.CREATE create) {
 
-<<<<<<< HEAD
             if(checkIdentity(create.getIdentity())){
                 //To do... 예외 처리
             }
@@ -39,7 +38,7 @@ public class MemberMstServiceImpl implements MemberMstService{
             }
 
             MemberMstEntity memberMstEntity = MemberMstEntity.builder()
-=======
+
         if(checkIdentity(create.getIdentity())){
             throw new DuplicatedException(ErrorCode.DUPLICATED_ID);
         }
@@ -50,7 +49,7 @@ public class MemberMstServiceImpl implements MemberMstService{
         //To do... 전화번호 중복 확인 ?
 
         MemberMstEntity memberMstEntity = MemberMstEntity.builder()
->>>>>>> cff93e700e3af16edea3bde10ab7ab38e8edab6d
+
                 .identity(create.getIdentity())
                 .password(passwordEncoder.encode(create.getPassword()))
                 .name(create.getName())
